@@ -1,8 +1,9 @@
 <script>
+    /** @type {import('./$types').PageData} */
+	export let data;
     import Row from "$lib/Row.svelte";
-
-    let name = "대법원 1976. 4. 27. 선고 74다2151 판결";
-    let fulltext = "이건 가처분의 피보전권리는 갑의 을에 대한 토지소유권이전등기청구권인데 반하여 이건 소송에서는 갑이 병을 대위하여 병의 을에 대한 토지소유권이전등기청구권을 행사하고 있어서 위 가처분의 피보전권리와 이건 소송물과는 동일성이 없으므로 위 가처분을 이건 소송에 유용할 수 없다.";
+    let {name, fulltext} = data;
+    
     let splitedText = fulltext.split(' ');
 
     let splited = [];
@@ -31,11 +32,41 @@
     .wrapper {
         max-width: 1000px;
         margin: 5% auto;
+
+        border: 2px solid black;
+    }
+
+    .wrapper header {
+        border-bottom: 2px solid black;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+    }
+
+    .wrapper .typewrite {
+        padding: 10px 20px;
+    }
+
+    .wrapper .btn {
+        width: 32px;
+        height: 32px;
+        line-height: 26px;
+        font-weight: bold;
+        font-size: 1.2em;
+        background-color: black;
+        color: white;
+        text-align: center;
     }
 </style>
 
 <div class="wrapper">
-    <h1>{name}</h1>
+    <header>
+        <h2>{name}</h2>
+        <a href="/"><div class="btn">x</div></a>
+    </header>
     <br />
     <div class="typewrite">
         {#each splited as text, idx}
